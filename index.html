@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Zero Por Ciento | Pastelería Fit Sin Azúcar</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #E8E5DC;
+            color: #1E2A22;
+            scroll-behavior: smooth;
+        }
+
+        /* Fondo */
+        .hero-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            object-fit: cover;
+            background-image: url('https://images.pexels.com/photos/4394612/pexels-photo-4394612.jpeg?auto=compress&cs=tinysrgb&w=1600');
+            background-size: cover;
+            background-position: center;
+        }
+        .pattern-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: repeating-linear-gradient(
+                90deg,
+                rgba(80, 100, 80, 0.15) 0px,
+                rgba(80, 100, 80, 0.15) 2px,
+                transparent 2px,
+                transparent 40px
+            );
+        }
+        .overlay-dark {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(220, 215, 200, 0.88);
+            z-index: -1;
+        }
+
+        :root {
+            --menta: #6B8F6E;
+            --menta-oscuro: #4A6B4D;
+            --crema: #F2EFE6;
+            --texto-oscuro: #1E2A22;
+            --dorado: #D4A843;
+            --dorado-oscuro: #B8913A;
+            --gris-fit: #DDD8CD;
+            --fondo-card: #FDFCF9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(240, 235, 225, 0.96);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(107, 143, 110, 0.4);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        
+        /* LOGO MÁS GRANDE Y POTENTE */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            flex-shrink: 0;
+        }
+        .logo-img {
+            height: 75px;
+            width: auto;
+            transition: transform 0.3s;
+        }
+        .logo-img:hover {
+            transform: scale(1.03);
+        }
+        .logo-text h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 4.2rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, #1E2A22, #3A5C3D, #6B8F6E);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            line-height: 1;
+            text-shadow: 3px 3px 12px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+
+        /* Navegación - CENTRADA PERFECTAMENTE */
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+            list-style: none;
+            flex-wrap: wrap;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            flex: 1;
+            justify-content: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--texto-oscuro);
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 1rem;
+            padding-bottom: 4px;
+        }
+        .nav-links a:hover {
+            color: var(--menta-oscuro);
+            border-bottom: 2px solid var(--dorado);
+        }
+        
+        /* REDES SOCIALES - A LA DERECHA */
+        .social-icons-header {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .social-icons-header a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            font-size: 2.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border-radius: 50%;
+            position: relative;
+        }
+        .social-icons-header a.instagram {
+            background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .social-icons-header a.instagram:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 18px rgba(214, 36, 159, 0.5);
+        }
+        .social-icons-header a.tiktok {
+            background: #000000;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .social-icons-header a.tiktok::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00f2ea, #ff0050);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        .social-icons-header a.tiktok:hover::before {
+            opacity: 1;
+        }
+        .social-icons-header a.tiktok:hover {
+            transform: scale(1.1);
+        }
+
+        /* FRASE ESPECIALISTAS - DEBAJO DEL MENÚ */
+        .especialistas-bar {
+            text-align: center;
+            padding: 0.8rem 0;
+            margin-top: 1rem;
+            border-top: 1px solid rgba(212, 168, 67, 0.3);
+            border-bottom: 1px solid rgba(212, 168, 67, 0.3);
+            background: rgba(212, 168, 67, 0.08);
+        }
+        .especialistas-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--dorado);
+            text-transform: uppercase;
+            display: inline-block;
+            background: linear-gradient(135deg, #D4A843, #F0C674);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .especialistas-text i {
+            margin: 0 8px;
+            font-size: 0.8rem;
+            color: var(--dorado);
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            color: var(--dorado);
+        }
+
+        /* Botón flotante WhatsApp */
+        .btn-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+            transition: 0.3s;
+            z-index: 99;
+            text-decoration: none;
+        }
+        .btn-whatsapp:hover {
+            transform: scale(1.05);
+            background: #128C7E;
+        }
+
+        /* Carrusel */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 32px;
+            margin-bottom: 2rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.2);
+        }
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(30,42,34,0.85);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: white;
+            transition: 0.2s;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .carousel-btn:hover {
+            background: var(--menta);
+            color: white;
+        }
+        .btn-prev { left: 20px; }
+        .btn-next { right: 20px; }
+        .carousel-dots {
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+            bottom: 60px;
+        }
+        .dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .dot.active {
+            background: var(--dorado);
+            transform: scale(1.2);
+        }
+
+        /* Secciones */
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid rgba(107, 143, 110, 0.3);
+        }
+        .section-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--texto-oscuro);
+        }
+        .section-title span {
+            border-bottom: 4px solid var(--dorado);
+            display: inline-block;
+            padding-bottom: 0.3rem;
+        }
+
+        /* Productos */
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .producto-card {
+            background: var(--fondo-card);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            text-align: center;
+            border: 1px solid rgba(107,143,110,0.2);
+        }
+        .producto-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 35px rgba(0,0,0,0.15);
+        }
+        .producto-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: var(--gris-fit);
+        }
+        .producto-info {
+            padding: 1.5rem;
+        }
+        .producto-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        /* Ingredientes */
+        .ingredientes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .ingrediente-card {
+            text-align: center;
+            background: var(--fondo-card);
+            padding: 1.8rem;
+            border-radius: 28px;
+            border: 1px solid rgba(107,143,110,0.3);
+            transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .ingrediente-card i {
+            font-size: 2.5rem;
+            color: var(--menta);
+            margin-bottom: 1rem;
+        }
+        .ingrediente-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Localización */
+        .loc-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+        }
+        .loc-info {
+            flex: 1;
+            background: var(--fondo-card);
+            padding: 2rem;
+            border-radius: 28px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        .mapa {
+            flex: 1;
+            border-radius: 28px;
+            overflow: hidden;
+            height: 350px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        .mapa iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Formulario */
+        .pedido-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--fondo-card);
+            padding: 2rem;
+            border-radius: 32px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 18px;
+            border: 1px solid #CCC8BC;
+            border-radius: 60px;
+            font-family: 'Inter', sans-serif;
+            transition: 0.2s;
+            background: white;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--menta);
+            box-shadow: 0 0 0 3px rgba(107,143,110,0.25);
+        }
+        textarea {
+            border-radius: 24px;
+            resize: vertical;
+        }
+        .btn-enviar {
+            background: var(--menta);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-weight: 700;
+            border-radius: 60px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+        .btn-enviar:hover {
+            background: var(--menta-oscuro);
+            transform: scale(0.98);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #6A675A;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(107,143,110,0.2);
+            margin-top: 1rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            .nav-links {
+                justify-content: center;
+                gap: 1.2rem;
+            }
+            .carousel-slide {
+                height: 300px;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .loc-grid {
+                flex-direction: column;
+            }
+            .logo-img {
+                height: 55px;
+            }
+            .logo-text h1 {
+                font-size: 3rem;
+                letter-spacing: -1px;
+            }
+            .logo {
+                justify-content: center;
+                flex-wrap: wrap;
+                text-align: center;
+            }
+            .social-icons-header {
+                justify-content: center;
+            }
+            .social-icons-header a {
+                width: 45px;
+                height: 45px;
+                font-size: 1.8rem;
+            }
+            .especialistas-text {
+                font-size: 0.75rem;
+                letter-spacing: 1px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text h1 {
+                font-size: 2.5rem;
+            }
+            .logo-img {
+                height: 45px;
+            }
+            .nav-links {
+                gap: 0.9rem;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+            .social-icons-header {
+                gap: 0.8rem;
+            }
+            .social-icons-header a {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+            .especialistas-text {
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+<div class="pattern-overlay"></div>
+<div class="overlay-dark"></div>
+
+<header>
+    <div class="container navbar">
+        <div class="logo">
+            <img class="logo-img" src="https://i.imgur.com/k5jrTvb.png" alt="Zero Por Ciento Logo">
+            <div class="logo-text">
+                <h1>ZERO% PALMA</h1>
+            </div>
+        </div>
+        
+        <!-- MENÚ CENTRADO -->
+        <ul class="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#postres">Nuestros Postres</a></li>
+            <li><a href="#que-usamos">¿Qué usamos?</a></li>
+            <li><a href="#localizacion">Localización</a></li>
+            <li><a href="#pedidos">Pedidos</a></li>
+        </ul>
+        
+        <div class="social-icons-header">
+            <a href="https://www.instagram.com/zero_por_ciento_palma" target="_blank" class="instagram" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.tiktok.com/@zeroporcientopalma" target="_blank" class="tiktok" aria-label="TikTok">
+                <i class="fab fa-tiktok"></i>
+            </a>
+        </div>
+    </div>
+    
+    <!-- FRASE ESPECIALISTAS - DEBAJO DEL MENÚ -->
+    <div class="especialistas-bar">
+        <div class="container">
+            <div class="especialistas-text">
+                <i class="fas fa-star"></i> ESPECIALISTAS EN POSTRES SIN AZÚCAR <i class="fas fa-star"></i>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <section id="inicio">
+        <div class="carousel-container">
+            <div class="carousel-slides" id="carouselSlides"></div>
+            <button class="carousel-btn btn-prev" id="prevBtn">❮</button>
+            <button class="carousel-btn btn-next" id="nextBtn">❯</button>
+            <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">Dulce salud, placer sin culpa</h2>
+            <p style="font-size: 1.1rem; line-height: 1.6;">En <strong>Zero Por Ciento</strong> creemos que cuidarse no está reñido con disfrutar. Somos la primera pastelería fit de Palma especializada en postres 0% azúcares añadidos, elaborados con ingredientes naturales y mucha pasión. 🍩🍪🧇</p>
+        </div>
+    </section>
+
+    <section id="postres">
+        <h2 class="section-title"><span>✨ Nuestros Postres ✨</span></h2>
+        <div class="productos-grid" id="productosGrid"></div>
+    </section>
+
+    <section id="que-usamos">
+        <h2 class="section-title"><span>🌱 ¿Qué nos hace diferentes? 🌱</span></h2>
+        <div class="ingredientes-grid">
+            <div class="ingrediente-card"><i class="fas fa-apple-alt"></i><h4>Edulcorantes Naturales</h4><p>Eritritol, stevia, monk fruit. Nada de azúcares refinados.</p></div>
+            <div class="ingrediente-card"><i class="fas fa-seedling"></i><h4>Harinas Saludables</h4><p>Almendra, avena, coco. Ricas en fibra y sin gluten.</p></div>
+            <div class="ingrediente-card"><i class="fas fa-heartbeat"></i><h4>Alto Valor Proteico</h4><p>Proteína de suero o vegetal para tu meta fitness.</p></div>
+            <div class="ingrediente-card"><i class="fas fa-leaf"></i><h4>Ingredientes Reales</h4><p>Fruta fresca, cacao puro, frutos secos. Sin conservantes.</p></div>
+        </div>
+    </section>
+
+    <section id="localizacion">
+        <h2 class="section-title"><span>📍 ¿Dónde encontrarnos? 📍</span></h2>
+        <div class="loc-grid">
+            <div class="loc-info">
+                <i class="fas fa-store" style="font-size: 2rem; color: var(--menta); margin-bottom: 1rem; display: inline-block;"></i>
+                <h3>Zero Por Ciento Palma</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Plaza Cardenal Reig 4, 07004 Palma</p>
+                <p><i class="fas fa-phone"></i> <a href="tel:+34647548329">647 548 329</a></p>
+                <p><i class="fab fa-instagram"></i> @zero_por_ciento_palma</p>
+                <div style="margin-top: 1.5rem;"><strong>Horario:</strong><br>Martes a Sábado: 10:00 - 20:00<br>Domingo y Lunes: Cerrado</div>
+            </div>
+            <div class="mapa">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1232.123456789!2d2.647887!3d39.569801!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x129793f0c6e0a2b3%3A0x0!2sPlaza%20Cardenal%20Reig%2C%204%2C%2007004%20Palma!5e0!3m2!1ses!2ses!4v1712345678901!5m2!1ses!2ses" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="pedidos">
+        <h2 class="section-title"><span>📦 Haz tu pedido 📦</span></h2>
+        <div class="pedido-form">
+            <form id="formPedido" onsubmit="event.preventDefault(); enviarPedido();">
+                <div class="form-group"><input type="text" id="nombre" placeholder="Nombre completo" required></div>
+                <div class="form-group"><input type="tel" id="telefono" placeholder="Teléfono" required></div>
+                <div class="form-group"><select id="producto"><option value="">Selecciona un producto</option><option>Donut Fit</option><option>Cookie Proteica</option><option>Waffle Zero</option><option>Tarta de Queso Fit</option><option>Brownie Sin Azúcar</option><option>Pack Sorpresa</option></select></div>
+                <div class="form-group"><textarea id="mensaje" rows="3" placeholder="Alergias, preferencias, fecha de recogida..."></textarea></div>
+                <button type="submit" class="btn-enviar"><i class="fab fa-whatsapp"></i> Enviar pedido por WhatsApp</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem; font-size: 0.8rem;">O llámanos al <strong>647 548 329</strong></p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Zero Por Ciento Palma · Pastelería Fit · Especialistas en postres sin azúcar</p>
+    <p>📍 Plaza Cardenal Reig 4 · 647 548 329 · @zero_por_ciento_palma</p>
+</footer>
+
+<a href="https://wa.me/34647548329" class="btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<script>
+    // Carrusel
+    const imagenes = [
+        "https://i.imgur.com/LXNS4tk.png",
+        "https://i.imgur.com/IxYfteO.png",
+        "https://i.imgur.com/774iO8Q.png",
+        "https://i.imgur.com/d3MPRpz.png",
+        "https://images.pexels.com/photos/6421796/pexels-photo-6421796.jpeg?auto=compress&w=800"
+    ];
+    let indice = 0;
+    const contenedor = document.getElementById('carouselSlides');
+    const dots = document.getElementById('carouselDots');
+    let intervalo;
+
+    function actualizarDots() { document.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === indice)); contenedor.style.transform = `translateX(-${indice * 100}%)`; }
+    function irASlide(index) { indice = (index + imagenes.length) % imagenes.length; actualizarDots(); reiniciarAutoplay(); }
+    function siguiente() { irASlide(indice + 1); }
+    function anterior() { irASlide(indice - 1); }
+    function reiniciarAutoplay() { if(intervalo) clearInterval(intervalo); intervalo = setInterval(siguiente, 5000); }
+    function crearCarrusel() {
+        contenedor.innerHTML = ''; dots.innerHTML = '';
+        imagenes.forEach((img, i) => {
+            const slide = document.createElement('div'); slide.className = 'carousel-slide'; slide.style.backgroundImage = `url('${img}')`; slide.style.backgroundSize = 'cover'; slide.style.backgroundPosition = 'center';
+            contenedor.appendChild(slide);
+            const dot = document.createElement('span'); dot.className = 'dot'; dot.onclick = () => irASlide(i); dots.appendChild(dot);
+        }); actualizarDots();
+    }
+    document.getElementById('prevBtn').onclick = anterior; document.getElementById('nextBtn').onclick = siguiente;
+    crearCarrusel(); reiniciarAutoplay();
+
+    // Productos
+    const productos = [
+        { nombre: "🍩 Donut Fit", descripcion: "Esponjoso, glaseado sin azúcar. Sabores: chocolate, fresa o vainilla.", img: "https://images.pexels.com/photos/5708600/pexels-photo-5708600.jpeg?auto=compress&w=400" },
+        { nombre: "🍪 Cookie Proteica", descripcion: "Crujiente por fuera, blandita por dentro. Con chispas de cacao 100%.", img: "https://images.pexels.com/photos/4641743/pexels-photo-4641743.jpeg?auto=compress&w=400" },
+        { nombre: "🧇 Waffle Zero", descripcion: "Waffle crujiente, sin gluten, acompañado de sirope de agave y frutos rojos.", img: "https://images.pexels.com/photos/5606566/pexels-photo-5606566.jpeg?auto=compress&w=400" },
+        { nombre: "🍰 Tarta de Queso Fit", descripcion: "Crema suave, base de almendra, sin azúcar y altísima en proteína.", img: "https://images.pexels.com/photos/4233134/pexels-photo-4233134.jpeg?auto=compress&w=400" },
+        { nombre: "🍫 Brownie Sin Azúcar", descripcion: "Intenso sabor a chocolate, textura húmeda y súper saludable.", img: "https://images.pexels.com/photos/6421796/pexels-photo-6421796.jpeg?auto=compress&w=400" }
+    ];
+    const grid = document.getElementById('productosGrid');
+    productos.forEach(prod => {
+        const card = document.createElement('div'); card.className = 'producto-card';
+        card.innerHTML = `<img class="producto-img" src="${prod.img}" alt="${prod.nombre}"><div class="producto-info"><h3>${prod.nombre}</h3><p>${prod.descripcion}</p></div>`;
+        grid.appendChild(card);
+    });
+
+    // Formulario
+    window.enviarPedido = function() {
+        const nombre = document.getElementById('nombre')?.value.trim();
+        const telefono = document.getElementById('telefono')?.value.trim();
+        if(!nombre || !telefono) { alert("❌ Completa nombre y teléfono."); return; }
+        const producto = document.getElementById('producto')?.value;
+        const mensaje = document.getElementById('mensaje')?.value.trim();
+        let texto = `Hola Zero Por Ciento! 👋%0AMe llamo *${nombre}* y quiero hacer un pedido:%0A📦 *Producto:* ${producto || "No especificado"}%0A${mensaje ? `📝 *Detalles:* ${mensaje}%0A` : ''}📞 Mi teléfono es: ${telefono}%0A¡Gracias! 🍩✨`;
+        window.open(`https://wa.me/34647548329?text=${texto}`, '_blank');
+        document.getElementById('formPedido').reset();
+        mostrarToast("✅ Redirigiendo a WhatsApp... ¡Gracias por tu pedido!");
+    };
+    function mostrarToast(msg) { let t = document.querySelector('.toast-msg'); if(t) t.remove(); const toast = document.createElement('div'); toast.className = 'toast-msg'; toast.innerHTML = msg; toast.style.position = 'fixed'; toast.style.bottom = '100px'; toast.style.right = '30px'; toast.style.background = '#6B8F6E'; toast.style.color = '#fff'; toast.style.padding = '12px 20px'; toast.style.borderRadius = '40px'; toast.style.zIndex = '999'; document.body.appendChild(toast); setTimeout(() => toast.remove(), 3000); }
+
+    document.querySelectorAll('.nav-links a').forEach(anchor => { anchor.addEventListener('click', function(e) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if(target) target.scrollIntoView({ behavior: 'smooth' }); }); });
+</script>
+</body>
+</html>
